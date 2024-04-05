@@ -7,13 +7,17 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct CounterView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
+    let maxScore: Int
+    
     @State private var player1Score = 0
     @State private var player2Score = 0
     @State private var showAlert = false
     
-    func checkScore(_ score: Int) {
-        if score == 11 {
+    func checkScore(thisScore: Int, otherScore: Int) {
+        if thisScore >= maxScore && thisScore > otherScore && thisScore - otherScore > 1 {
             WKInterfaceDevice.current().play(.success)
             showAlert = true
         }
@@ -24,23 +28,28 @@ struct ContentView: View {
             HStack {
                 Text("\(player1Score)")
                     .foregroundStyle(.yellow)
-                    .font(.system(size: 24, design: .monospaced))
+                    .font(.system(size: 26, design: .monospaced))
+                    .frame(width: 40)
                     .padding()
                 Text(":")
+                    .frame(width: 10)
                 Text("\(player2Score)")
                     .foregroundStyle(.yellow)
-                    .font(.system(size: 24, design: .monospaced))
+                    .font(.system(size: 26, design: .monospaced))
+                    .frame(width: 40)
                     .padding()
             }
             HStack {
                 Button("Player 1") {
                     player1Score += 1
-                    checkScore(player1Score)
+                    checkScore(thisScore: player1Score, otherScore: player2Score)
                 }
+                .font(.system(size: 15))
                 Button("Player 2") {
                     player2Score += 1
-                    checkScore(player2Score)
+                    checkScore(thisScore: player2Score, otherScore: player1Score)
                 }
+                .font(.system(size: 15))
             }
         }
         .padding()
@@ -51,8 +60,8 @@ struct ContentView: View {
                     player1Score = 0
                     player2Score = 0
                 },
-                secondaryButton: .default(Text("Quit")) {
-                    print("Should quit)))")
+                secondaryButton: .destructive(Text("Quit")) {
+                    presentationMode.wrappedValue.dismiss()
                 }
             )
         })
@@ -60,5 +69,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    CounterView(maxScore: 11)
 }
