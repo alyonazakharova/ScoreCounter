@@ -15,11 +15,18 @@ struct CounterView: View {
     @State private var player1Score = 0
     @State private var player2Score = 0
     @State private var showAlert = false
+    @State private var player1WonSets = 0
+    @State private var player2WonSets = 0
     
     func checkScore(thisScore: Int, otherScore: Int) {
         if thisScore >= maxScore && thisScore > otherScore && thisScore - otherScore > 1 {
             WKInterfaceDevice.current().play(.success)
             showAlert = true
+            if player1Score > player2Score {
+                player1WonSets += 1
+            } else {
+                player2WonSets += 1
+            }
         }
     }
     
@@ -40,16 +47,24 @@ struct CounterView: View {
                     .padding()
             }
             HStack {
-                Button("Player 1") {
-                    player1Score += 1
-                    checkScore(thisScore: player1Score, otherScore: player2Score)
+                VStack {
+                    Button("Player 1") {
+                        player1Score += 1
+                        checkScore(thisScore: player1Score, otherScore: player2Score)
+                    }
+                    .font(.system(size: 15))
+                    Text("\(player1WonSets) set\(player1WonSets == 1 ? "" : "s")")
+                        .font(.system(size: 10))
                 }
-                .font(.system(size: 15))
-                Button("Player 2") {
-                    player2Score += 1
-                    checkScore(thisScore: player2Score, otherScore: player1Score)
+                VStack {
+                    Button("Player 2") {
+                        player2Score += 1
+                        checkScore(thisScore: player2Score, otherScore: player1Score)
+                    }
+                    .font(.system(size: 15))
+                    Text("\(player2WonSets) set\(player2WonSets == 1 ? "" : "s")")
+                        .font(.system(size: 10))
                 }
-                .font(.system(size: 15))
             }
         }
         .padding()
