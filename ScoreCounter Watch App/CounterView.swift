@@ -56,6 +56,7 @@ struct CounterView: View {
         .alert(isPresented: $showAlert, content: {
             Alert (
                 title: Text("This set is over!"),
+                message: Text("Score: \(player1Score):\(player2Score)"),
                 primaryButton: .default(Text("Start again")) {
                     player1Score = 0
                     player2Score = 0
