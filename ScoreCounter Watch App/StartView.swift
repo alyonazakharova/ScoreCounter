@@ -42,6 +42,7 @@ struct ScoreTypeView: View {
     var body: some View {
         HStack {
             Image(systemName: scoreType.symbolName)
+                .foregroundStyle(Color.yellow)
                 .padding()
             Text(scoreType.label)
         }
