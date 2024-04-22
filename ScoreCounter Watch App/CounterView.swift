@@ -9,38 +9,19 @@ import SwiftUI
 
 struct CounterView: View {
     @Environment(\.presentationMode) var presentationMode
-    
-    let maxScore: Int
-    
-    @State private var player1Score = 0
-    @State private var player2Score = 0
-    @State private var showAlert = false
-    @State private var player1WonSets = 0
-    @State private var player2WonSets = 0
-    
-    func checkScore(thisScore: Int, otherScore: Int) {
-        if thisScore >= maxScore && thisScore > otherScore && thisScore - otherScore > 1 {
-            WKInterfaceDevice.current().play(.success)
-            showAlert = true
-            if player1Score > player2Score {
-                player1WonSets += 1
-            } else {
-                player2WonSets += 1
-            }
-        }
-    }
+    @ObservedObject var viewModel: GameViewModel
     
     var body: some View {
         VStack {
             HStack {
-                Text("\(player1Score)")
+                Text("\(viewModel.player1Score)")
                     .foregroundStyle(.yellow)
                     .font(.system(size: 26, design: .monospaced))
                     .frame(width: 40)
                     .padding()
                 Text(":")
                     .frame(width: 10)
-                Text("\(player2Score)")
+                Text("\(viewModel.player2Score)")
                     .foregroundStyle(.yellow)
                     .font(.system(size: 26, design: .monospaced))
                     .frame(width: 40)
@@ -49,41 +30,41 @@ struct CounterView: View {
             HStack {
                 VStack {
                     Button("Player 1") {
-                        player1Score += 1
-                        checkScore(thisScore: player1Score, otherScore: player2Score)
+                        viewModel.addScore(which:false)
                     }
                     .font(.system(size: 15))
-                    Text("\(player1WonSets) set\(player1WonSets == 1 ? "" : "s")")
+                    Text("\(viewModel.player1WonSets) set\(viewModel.player1WonSets == 1 ? "" : "s")")
                         .font(.system(size: 10))
                 }
                 VStack {
                     Button("Player 2") {
-                        player2Score += 1
-                        checkScore(thisScore: player2Score, otherScore: player1Score)
+                        viewModel.addScore(which:true)
                     }
                     .font(.system(size: 15))
-                    Text("\(player2WonSets) set\(player2WonSets == 1 ? "" : "s")")
+                    Text("\(viewModel.player2WonSets) set\(viewModel.player2WonSets == 1 ? "" : "s")")
                         .font(.system(size: 10))
                 }
             }
         }
         .padding()
-        .alert(isPresented: $showAlert, content: {
+        .alert(isPresented: $viewModel.showAlert, content: {
             Alert (
                 title: Text("This set is over!"),
-                message: Text("Score: \(player1Score):\(player2Score)"),
+                message: Text("Score: \(viewModel.player1Score):\(viewModel.player2Score)"),
                 primaryButton: .default(Text("Start again")) {
-                    player1Score = 0
-                    player2Score = 0
+                    viewModel.player1Score = 0
+                    viewModel.player2Score = 0
                 },
                 secondaryButton: .destructive(Text("Quit")) {
                     presentationMode.wrappedValue.dismiss()
                 }
             )
         })
+        .onAppear {
+            viewModel.startMotionUpdates()
+        }
+        .onDisappear {
+            viewModel.stopMotionUpdates()
+        }
     }
-}
-
-#Preview {
-    CounterView(maxScore: 11)
 }

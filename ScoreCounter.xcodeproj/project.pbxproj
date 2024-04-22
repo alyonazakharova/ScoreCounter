@@ -13,6 +13,8 @@
 		80D7F3AF2BBF23D100526274 /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D7F3AE2BBF23D100526274 /* CounterView.swift */; };
 		80D7F3B12BBF23D300526274 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D7F3B02BBF23D300526274 /* Assets.xcassets */; };
 		80D7F3B42BBF23D300526274 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D7F3B32BBF23D300526274 /* Preview Assets.xcassets */; };
+		E15B7D622BD57470007830BD /* ModelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15B7D612BD57470007830BD /* ModelView.swift */; };
+		E15B7D6A2BD5856F007830BD /* MotionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15B7D692BD5856F007830BD /* MotionController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,9 @@
 		80D7F3AE2BBF23D100526274 /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		80D7F3B02BBF23D300526274 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80D7F3B32BBF23D300526274 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E15B7D612BD57470007830BD /* ModelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelView.swift; sourceTree = "<group>"; };
+		E15B7D672BD57FA5007830BD /* ScoreCounter-Watch-App-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ScoreCounter-Watch-App-Info.plist"; sourceTree = SOURCE_ROOT; };
+		E15B7D692BD5856F007830BD /* MotionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,11 +85,14 @@
 		80D7F3AB2BBF23D100526274 /* ScoreCounter Watch App */ = {
 			isa = PBXGroup;
 			children = (
+				E15B7D692BD5856F007830BD /* MotionController.swift */,
+				E15B7D672BD57FA5007830BD /* ScoreCounter-Watch-App-Info.plist */,
 				80D7F3AC2BBF23D100526274 /* ScoreCounterApp.swift */,
 				80D7F3AE2BBF23D100526274 /* CounterView.swift */,
 				809698D82BC0A71A008047CE /* StartView.swift */,
 				80D7F3B02BBF23D300526274 /* Assets.xcassets */,
 				80D7F3B22BBF23D300526274 /* Preview Content */,
+				E15B7D612BD57470007830BD /* ModelView.swift */,
 			);
 			path = "ScoreCounter Watch App";
 			sourceTree = "<group>";
@@ -142,7 +150,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					80D7F3A02BBF23D100526274 = {
 						CreatedOnToolsVersion = 15.0.1;
@@ -197,6 +205,8 @@
 			files = (
 				809698D92BC0A71A008047CE /* StartView.swift in Sources */,
 				80D7F3AF2BBF23D100526274 /* CounterView.swift in Sources */,
+				E15B7D622BD57470007830BD /* ModelView.swift in Sources */,
+				E15B7D6A2BD5856F007830BD /* MotionController.swift in Sources */,
 				80D7F3AD2BBF23D100526274 /* ScoreCounterApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -246,6 +256,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -307,6 +318,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -333,10 +345,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ScoreCounter Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = Z3AC7YG7YK;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = U746C73345;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ScoreCounter-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = ScoreCounter;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
@@ -363,10 +376,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"ScoreCounter Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = Z3AC7YG7YK;
+				DEVELOPMENT_ASSET_PATHS = "";
+				DEVELOPMENT_TEAM = U746C73345;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ScoreCounter-Watch-App-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = ScoreCounter;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				INFOPLIST_KEY_WKWatchOnly = YES;
@@ -393,7 +407,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z3AC7YG7YK;
+				DEVELOPMENT_TEAM = U746C73345;
 				INFOPLIST_KEY_CFBundleDisplayName = ScoreCounter;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.az.ScoreCounter;
@@ -409,7 +423,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = Z3AC7YG7YK;
+				DEVELOPMENT_TEAM = U746C73345;
 				INFOPLIST_KEY_CFBundleDisplayName = ScoreCounter;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.az.ScoreCounter;
