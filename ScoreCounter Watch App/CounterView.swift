@@ -30,7 +30,7 @@ struct CounterView: View {
             HStack {
                 VStack {
                     Button("Player 1") {
-                        viewModel.addScore(which:false)
+                        viewModel.addScore(isFirstPlayer: true)
                     }
                     .font(.system(size: 15))
                     Text("\(viewModel.player1WonSets) set\(viewModel.player1WonSets == 1 ? "" : "s")")
@@ -38,7 +38,7 @@ struct CounterView: View {
                 }
                 VStack {
                     Button("Player 2") {
-                        viewModel.addScore(which:true)
+                        viewModel.addScore(isFirstPlayer: false)
                     }
                     .font(.system(size: 15))
                     Text("\(viewModel.player2WonSets) set\(viewModel.player2WonSets == 1 ? "" : "s")")

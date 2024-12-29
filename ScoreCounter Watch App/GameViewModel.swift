@@ -4,8 +4,7 @@
 //
 //  Created by Konstantin Smirnov on 21.04.2024.
 //
-import Foundation
-import Combine
+
 import CoreMotion
 
 class GameViewModel: ObservableObject {
@@ -14,18 +13,20 @@ class GameViewModel: ObservableObject {
     @Published var showAlert = false
     @Published var player1WonSets = 0
     @Published var player2WonSets = 0
+    
     let maxScore: Int
 
     private var motionManager = CMMotionManager()
-    private var updateInterval = 0.5
-
+    
     init(maxScore: Int) {
         self.maxScore = maxScore
+        motionManager.deviceMotionUpdateInterval = 0.5
     }
-
+    
+    // TODO: надо зделац так чтобы екран у аппки и мотион апедйт были активны тока когда поднято запястье
     func startMotionUpdates() {
         if motionManager.isDeviceMotionAvailable {
-            motionManager.deviceMotionUpdateInterval = updateInterval
+            print("oh la la")
             motionManager.startDeviceMotionUpdates(to: OperationQueue.main) { [weak self] (motion, error) in
                 guard let self = self, let motion = motion else {
                     print("Error or no data in device motion updates: \(error?.localizedDescription ?? "Unknown error")")
@@ -44,25 +45,33 @@ class GameViewModel: ObservableObject {
 
     private func processDeviceMotion(_ motion: CMDeviceMotion) {
         let rotationRate = motion.rotationRate
-            // я что-то наговнокодил #Аленканепизди
-        if abs(rotationRate.z) > 0.6 {
+        print("x: \(String(format: "%.2f", rotationRate.x)),\ty: \(String(format: "%.2f", rotationRate.y)), z: \(String(format: "%.2f", rotationRate.z))")
+        
+        if rotationRate.y > 1.0 {
+            // поднятие предплечья
             DispatchQueue.main.async {
-                self.wristMove()
+                print("SECOND player movement detected")
+                self.wristMove(isFirstPlayer: false)
+            }
+        } else if rotationRate.x > 1.0 {
+            // поворот запястья от себя
+            DispatchQueue.main.async {
+                print("FIRST player movement detected")
+                self.wristMove(isFirstPlayer: true)
             }
         }
     }
 
-    func wristMove() {
-        self.player1Score += 1
-        checkScore()
+    func wristMove(isFirstPlayer: Bool) {
+        self.addScore(isFirstPlayer: isFirstPlayer)
     }
 
-    func addScore(which: Bool) {
+    func addScore(isFirstPlayer: Bool) {
         print("Add score")
-        if which {
-            self.player2Score += 1
-        } else {
+        if isFirstPlayer {
             self.player1Score += 1
+        } else {
+            self.player2Score += 1
         }
         checkScore()
     }
@@ -84,5 +93,3 @@ class GameViewModel: ObservableObject {
         player2Score = 0
     }
 }
-
-
