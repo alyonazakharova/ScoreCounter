@@ -12,7 +12,7 @@ struct StartView: View {
         NavigationStack {
             List {
                 ForEach(sportTypes) { sportType in
-                    NavigationLink(destination: CounterView(viewModel: GameViewModel(maxScore: sportType.maxScore))) {
+                    NavigationLink(destination: GameView(viewModel: GameViewModel(maxScore: sportType.maxScore))) {
                         ScoreTypeView(scoreType: sportType)
                     }
                 }

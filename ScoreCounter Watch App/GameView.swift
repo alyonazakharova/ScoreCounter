@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CounterView: View {
+struct GameView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: GameViewModel
     
